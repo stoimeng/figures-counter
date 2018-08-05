@@ -15,7 +15,7 @@ import test.PerformanceUtils.Timer;
 
 public class FigureCounterLongevityTest {
    private static final long MINIMUM_EXECUTION_TIME = TimeUnit.MINUTES
-         .toNanos(1);
+         .toMillis(1);
 
    private final ScheduledExecutorService scheduler = Executors
          .newScheduledThreadPool(1);
