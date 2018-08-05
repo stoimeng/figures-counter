@@ -66,6 +66,29 @@ public class PerformanceUtils {
       }
 
       /**
+       * Get the elapsed time in milliseconds
+       * 
+       * @return the elapsed time in milliseconds
+       */
+      public synchronized long getMilliseconds() {
+         if (startTime == null) {
+            throw new IllegalStateException("Timer has not been started");
+         }
+
+         long stopTime;
+         if (this.stopTime == null) {
+            stopTime = System.nanoTime();
+         } else {
+            stopTime = this.stopTime;
+         }
+
+         long milliseconds = TimeUnit.NANOSECONDS
+               .toMillis(stopTime - startTime);
+
+         return milliseconds;
+      }
+
+      /**
        * Prints the elapsed time in milliseconds
        */
       public void printMilliseconds() {
@@ -80,19 +103,7 @@ public class PerformanceUtils {
        *           with the milliseconds value
        */
       public synchronized void printMilliseconds(String messageFormatString) {
-         if (startTime == null) {
-            throw new IllegalStateException("Timer has not been started");
-         }
-
-         long stopTime;
-         if (this.stopTime == null) {
-            stopTime = System.nanoTime();
-         } else {
-            stopTime = this.stopTime;
-         }
-
-         long milliseconds = TimeUnit.NANOSECONDS
-               .toMillis(stopTime - startTime);
+         long milliseconds = getMilliseconds();
          System.out.println(String.format(messageFormatString, milliseconds));
       }
    }

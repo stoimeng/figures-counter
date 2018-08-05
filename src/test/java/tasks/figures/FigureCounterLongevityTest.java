@@ -30,7 +30,6 @@ public class FigureCounterLongevityTest {
    @Test
    public void testCounter() {
       int columns = 1000;
-      long startTime = System.nanoTime();
       boolean[] data = DataUtils.buildRandomData(100, columns);
       FigureCounter counter = new FigureCounter(data, columns);
 
@@ -41,7 +40,7 @@ public class FigureCounterLongevityTest {
 
       do {
          counter.count();
-      } while ((System.nanoTime() - startTime) < MINIMUM_EXECUTION_TIME);
+      } while (timer.getMilliseconds() < MINIMUM_EXECUTION_TIME);
 
       timer.printMilliseconds("Total milliseconds counting has been "
             + "continuously performed: %s");

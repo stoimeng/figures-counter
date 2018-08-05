@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.UUID;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -83,8 +84,10 @@ public class FigureCounterLauncherTest {
 
    @Test
    public void testValidParameters() {
-      FigureCounterLauncher.initCounter(validDataFilePath.toString(),
+      FigureCounter counter = FigureCounterLauncher.initCounter(
+            validDataFilePath.toString(),
             String.valueOf(VALID_DATA.length() / 2));
+      Assert.assertNotNull("Counter", counter);
    }
 
    private Path createTempDataFile(String data) throws IOException {
